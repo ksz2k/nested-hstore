@@ -1,3 +1,5 @@
+require "active_record/connection_adapters/postgresql/cast"
+
 module NestedHstore
   class Serializer
     
