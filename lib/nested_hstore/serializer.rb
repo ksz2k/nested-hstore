@@ -1,5 +1,7 @@
 module NestedHstore
   class Serializer
+    
+    include ActiveRecord::ConnectionAdapters::PostgreSQLColumn::Cast
 
     def initialize
       @type_key = '__TYPE__'
@@ -43,6 +45,7 @@ module NestedHstore
 
     def deserialize(hash)
       return nil if hash.nil?
+      hash = string_to_hstore(hash) if hash.is_a?(String)
       raise 'Hstore value should be a hash' unless hash.is_a?(Hash)
       type_value = hash.delete(@type_key)
       type = @types_map_inverted[type_value]
