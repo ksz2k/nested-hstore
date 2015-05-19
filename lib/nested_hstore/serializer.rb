@@ -1,7 +1,9 @@
+require "active_record/connection_adapters/postgresql/cast"
+
 module NestedHstore
   class Serializer
     
-    include ::ActiveRecord::ConnectionAdapters::PostgreSQLColumn::Cast
+    include ActiveRecord::ConnectionAdapters::PostgreSQLColumn::Cast
 
     def initialize
       @type_key = '__TYPE__'
